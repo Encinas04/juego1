@@ -23,7 +23,7 @@ public class Juego {
         float velocidad1 = 0;
         float ataque1 = 0;
         float defensa1 = 0;
-        float vida1 = 0;
+        float vida1 = 1;
 
         float total2 = 0;
         float velocidad2 = 0;
