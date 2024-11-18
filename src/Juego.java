@@ -83,10 +83,10 @@ public class Juego {
 
 
 
-                        while (ataque1 < 1 || ataque1 > 200) {
+                        while (ataque1 < 2 || ataque1 > 200) {
                             System.out.println("Seleccione su ataque (entre 1 y 200): ");
                             ataque1 = scan.nextInt();
-                            if (ataque1 < 1 || ataque1 > 200) {
+                            if (ataque1 < 2 || ataque1 > 200) {
                                 System.out.println("Los valores deben ser entre 1 y 200");
                             }
                         }
@@ -119,6 +119,11 @@ public class Juego {
 
                         if (total1 < 4 || total1 > 500) {
                             System.out.println("El total de puntos debe ser entre 4 y 500. Total actual: " + total1);
+                            velocidad1 = 0;
+                            ataque1 = 0;
+                            defensa1 = 0;
+                            vida1 = 0;
+
                         }
                     }
 
@@ -181,6 +186,10 @@ public class Juego {
 
                         if (total2 < 4 || total2 > 500) {
                             System.out.println("El total de puntos debe ser entre 4 y 500. Total actual: " + total2);
+                            velocidad2 = 0;
+                            ataque2 = 0;
+                            defensa2 = 0;
+                            vida2 = 0;
                         }
                     }
                     System.out.println("¡Total aceptado! El total de puntos es: " + total2);
@@ -429,40 +438,43 @@ public class Juego {
                 System.out.println("Para atque pulse 1, para curarse pulse 2");
                 int cantidadGuiones1 = (int) (vida1 / 10);
                 String barraDeVida1 = "♥\uFE0F".repeat(cantidadGuiones1);
-                System.out.println("Tienes " + vida1 + " de vida \n" +
+                int vidaint1=(int) vida1;
+                System.out.println("Tienes " + vidaint1 + " de vida \n" +
                         barraDeVida1);
                 accion = scan.nextInt();
                 switch (accion) {
                     case 1:
                         golpe = 0;
-                        float randomNumber = 0.8f + random.nextFloat();
+                        float randomNumber = 0.5f + random.nextFloat();
                         mitigacion = 0;
                         mitigacion = defensa2 / (defensa2 + 100);
 
 
-                        if (randomNumber >= 1.5) {
+                        if (randomNumber >= 1.3) {
                             golpe = (ataque1 * mitigacion) * randomNumber;
-                            System.out.println("Has asestado un golpe critico de" + golpe);
+                            int golpeint=(int)golpe;
+                            System.out.println("Has asestado un golpe critico de " + golpeint);
                             vida2 = vida2 - golpe;
                             if (vida2>0){
                                 cantidadGuiones2 = (int) (vida2 / 10);
                                 barraDeVida2 = "♥\uFE0F".repeat(cantidadGuiones2);
-
-                                System.out.println("La vida del jugador 2 es de " + vida2+"\n"+
+                                int vidaint2=(int) vida2;
+                                System.out.println("La vida del jugador 2 es de " + vidaint2+"\n"+
                                         barraDeVida2+"\n" +
                                         "\n");
                             }else{
                                 System.out.println("El jugador 2 ha muerto \uD83D\uDC80");
                             }
-                        } else if (randomNumber >= 1.0) {
+                        } else if (randomNumber >= 1.0&& randomNumber<1.3) {
                             golpe = (ataque1 * mitigacion) * randomNumber;
-                            System.out.println("Has asestado un golpe normal de " + golpe);
+                            int golpeint=(int)golpe;
+                            System.out.println("Has asestado un golpe normal de " + golpeint);
                             vida2 = vida2 - golpe;
                             if (vida2>0){
                                 cantidadGuiones2 = (int) (vida2 / 10);
                                 barraDeVida2 = "♥\uFE0F".repeat(cantidadGuiones2);
-
-                                System.out.println("La vida del jugador 2 es de " + vida2+"\n"+
+                                int vidaint2=(int) vida2;
+                                System.out.println("La vida del jugador 2 es de " + vidaint2+"\n"+
                                         barraDeVida2+"\n" +
                                         "\n");
                             }else{
@@ -470,15 +482,16 @@ public class Juego {
                             }
 
 
-                        } else {
+                        } else if (randomNumber<1.0&& randomNumber>=0.5){
                             golpe = (ataque1 * mitigacion) * randomNumber;
-                            System.out.println("Has asestado un golpe debil de " + golpe);
+                            int golpeint=(int)golpe;
+                            System.out.println("Has asestado un golpe debil de " + golpeint);
                             vida2 = vida2 - golpe;
                             if (vida2>0){
                                 cantidadGuiones2 = (int) (vida2 / 10);
                                 barraDeVida2 = "♥\uFE0F".repeat(cantidadGuiones2);
-
-                                System.out.println("La vida del jugador 2 es de " + vida2+"\n"+
+                                int vidaint2=(int) vida2;
+                                System.out.println("La vida del jugador 2 es de " + vidaint2+"\n"+
                                         barraDeVida2+"\n" +
                                         "\n");
                             }else{
@@ -490,14 +503,20 @@ public class Juego {
                         break;
                     case 2:
                         if (pocion1 != 0) {
-                            vida1 = vida1 + cura;
-                            cantidadGuiones1 = (int) (vida1 / 10);
-                            barraDeVida1 = "♥\uFE0F".repeat(cantidadGuiones1);
-                            System.out.println("Tu vida ha subido a " + vida1+"\n"+
-                                    barraDeVida1);
-                            pocion1--;
-                            System.out.println("Te quedan "+pocion1+" pociones\n" +
-                                    "\n");
+                            if (vida1<200){
+                                vida1 = vida1 + cura;
+                                cantidadGuiones1 = (int) (vida1 / 10);
+                                barraDeVida1 = "♥\uFE0F".repeat(cantidadGuiones1);
+                                vidaint1=(int) vida1;
+                                System.out.println("Tu vida ha subido a " + vidaint1+"\n"+
+                                        barraDeVida1);
+                                pocion1--;
+                                System.out.println("Te quedan "+pocion1+" pociones\n" +
+                                        "\n");
+                            }else{
+                                System.out.println("No puedes superar el limite de 200 de vida, has perdido tu pocion");
+                            }
+
                         } else {
                             System.out.println("No te quedan pociones, has gastado tu turno\n" +
                                     "\n");
@@ -516,52 +535,59 @@ public class Juego {
                 if (vida2>0) {
                     System.out.println("TURNO DEL JUGADOR 2 ");
                     System.out.println("Para atque pulse 1, para curarse pulse 2 ");
-                    System.out.println("Tienes " + vida2 + " de vida\n" +
+                    int vidaint2=(int) vida2;
+                    System.out.println("Tienes " + vidaint2 + " de vida\n" +
                             barraDeVida2);
 
                     accion = scan.nextInt();
                     switch (accion) {
                         case 1:
                             golpe = 0;
-                            float randomNumber = 0.8f + random.nextFloat();
+                            float randomNumber = 0.5f + random.nextFloat();
                             mitigacion = 0;
                             mitigacion = defensa1 / (defensa1 + 100);
-                            if (randomNumber >= 1.4) {
+                            if (randomNumber >= 1.3) {
                                 golpe = (ataque2 * mitigacion) * randomNumber;
-                                System.out.println("Has asestado un golpe critico de " + golpe);
+                                int golpeint=(int)golpe;
+                                System.out.println("Has asestado un golpe critico de " + golpeint);
                                 vida1 = vida1 - golpe;
                                 if (vida1>0){
                                     cantidadGuiones1 = (int) (vida1 / 10);
                                     barraDeVida1 = "♥\uFE0F".repeat(cantidadGuiones1);
-                                    System.out.println("La vida del jugador 1 es de " + vida1+"\n"+barraDeVida1+"\n" +
+                                    vidaint1=(int) vida1;
+                                    System.out.println("La vida del jugador 1 es de " + vidaint1+"\n"+barraDeVida1+"\n" +
                                             "\n");
                                 }else{
                                     System.out.println("El jugador 1 ha muerto \uD83D\uDC80");
                                 }
 
 
-                            } else if (randomNumber >= 1.0) {
+                            } else if (randomNumber >= 1.0&& randomNumber<1.3) {
                                 golpe = (ataque2 * mitigacion) * randomNumber;
-                                System.out.println("Has asestado un golpe normal de " + golpe);
+                                int golpeint=(int)golpe;
+                                System.out.println("Has asestado un golpe normal de " + golpeint);
                                 vida1 = vida1 - golpe;
                                 if (vida1>0){
                                     cantidadGuiones1 = (int) (vida1 / 10);
                                     barraDeVida1 = "♥\uFE0F".repeat(cantidadGuiones1);
-                                    System.out.println("La vida del jugador 1 es de " + vida1+"\n"+barraDeVida1+"\n" +
+                                    vidaint1=(int) vida1;
+                                    System.out.println("La vida del jugador 1 es de " + vidaint1+"\n"+barraDeVida1+"\n" +
                                             "\n");
                                 }else{
                                     System.out.println("El jugador 1 ha muerto \uD83D\uDC80");
                                 }
 
 
-                            } else {
+                            } else if (randomNumber<1.0&& randomNumber>=0.5){
                                 golpe = (ataque2 * mitigacion) * randomNumber;
-                                System.out.println("Has asestado un golpe debil de " + golpe);
+                                int golpeint=(int)golpe;
+                                System.out.println("Has asestado un golpe debil de " + golpeint);
                                 vida1 = vida1 - golpe;
                                 if (vida1>0){
                                     cantidadGuiones1 = (int) (vida1 / 10);
                                     barraDeVida1 = "♥\uFE0F".repeat(cantidadGuiones1);
-                                    System.out.println("La vida del jugador 1 es de " + vida1+"\n"+barraDeVida1+"\n" +
+                                    vidaint1=(int) vida1;
+                                    System.out.println("La vida del jugador 1 es de " + vidaint1+"\n"+barraDeVida1+"\n" +
                                             "\n");
                                 }else{
                                     System.out.println("El jugador 1 ha muerto \uD83D\uDC80");
@@ -572,13 +598,19 @@ public class Juego {
                             break;
                         case 2:
                             if (pocion2 != 0) {
-                                vida2 = vida2 + cura;
-                                cantidadGuiones2 = (int) (vida2 / 10);
-                                barraDeVida2 = "♥\uFE0F".repeat(cantidadGuiones2);
-                                System.out.println("Tu vida ha subido a " + vida2+"\n"+barraDeVida2);
-                                pocion2--;
-                                System.out.println("Te quedan "+pocion2+" pociones\n" +
-                                        "\n");
+                                if (vida2<200){
+                                    vida2 = vida2 + cura;
+                                    cantidadGuiones2 = (int) (vida2 / 10);
+                                    barraDeVida2 = "♥\uFE0F".repeat(cantidadGuiones2);
+                                    vidaint2=(int) vida2;
+                                    System.out.println("Tu vida ha subido a " + vidaint2+"\n"+barraDeVida2);
+                                    pocion2--;
+                                    System.out.println("Te quedan "+pocion2+" pociones\n" +
+                                            "\n");
+                                }else{
+                                    System.out.println("No puedes superar el limite de 200 de vida, has perdido tu pocion");
+                                }
+
                             } else {
                                 System.out.println("No te quedan pociones, has gastado tu turno \n" +
                                         "\n");
@@ -603,23 +635,26 @@ public class Juego {
                 String barraDeVida1 = "♥\uFE0F".repeat(cantidadGuiones1);
                 System.out.println("TURNO DEL JUGADOR 2 ");
                 System.out.println("Para atque pulse 1, para curarse pulse 2 ");
-                System.out.println("Tienes " + vida2 + " de vida \n" +
+                int vidaint2=(int) vida2;
+                System.out.println("Tienes " + vidaint2 + " de vida \n" +
                         barraDeVida2);
                 accion = scan.nextInt();
                 switch (accion) {
                     case 1:
                         golpe = 0;
-                        float randomNumber = 0.8f + random.nextFloat();
+                        float randomNumber = 0.5f + random.nextFloat();
                         mitigacion = 0;
                         mitigacion = defensa2 / (defensa2 + 100);
-                        if (randomNumber >= 1.5) {
+                        if (randomNumber >= 1.3) {
                             golpe = (ataque2 * mitigacion) * randomNumber;
-                            System.out.println("Has asestado un golpe critico de " + golpe);
+                            int golpeint=(int)golpe;
+                            System.out.println("Has asestado un golpe critico de " + golpeint);
                             vida1 = vida1 - golpe;
                             if (vida1>0){
                                 cantidadGuiones1 = (int) (vida1 / 10);
                                 barraDeVida1 = "♥\uFE0F".repeat(cantidadGuiones1);
-                                System.out.println("La vida del jugador 1 es de " + vida1+"\n"+barraDeVida1+"\n" +
+                                int vidaint1=(int) vida1;
+                                System.out.println("La vida del jugador 1 es de " + vidaint1+"\n"+barraDeVida1+"\n" +
                                         "\n");
                             }else{
                                 System.out.println("El jugador 1 ha muerto \uD83D\uDC80");
@@ -627,26 +662,30 @@ public class Juego {
 
 
                         }
-                        else if (randomNumber>=1.0) {
+                        else if (randomNumber>=1.0&& randomNumber<1.3) {
                             golpe = (ataque2 * mitigacion) * randomNumber;
-                            System.out.println("Has asestado un golpe normal de " + golpe);
+                            int golpeint=(int)golpe;
+                            System.out.println("Has asestado un golpe normal de " + golpeint);
                             vida1 = vida1 - golpe;
                             if (vida1>0){
                                 cantidadGuiones1 = (int) (vida1 / 10);
                                 barraDeVida1 = "♥\uFE0F".repeat(cantidadGuiones1);
-                                System.out.println("La vida del jugador 1 es de " + vida1+"\n"+barraDeVida1+"\n" +
+                                int vidaint1=(int) vida1;
+                                System.out.println("La vida del jugador 1 es de " + vidaint1+"\n"+barraDeVida1+"\n" +
                                         "\n");
                             }else{
                                 System.out.println("El jugador 1 ha muerto \uD83D\uDC80");
                             }
-                        } else {
+                        } else if (randomNumber<1.0 && randomNumber>=0.5){
                             golpe = (ataque2 * mitigacion) * randomNumber;
-                            System.out.println("Has asestado un golpe debil de " + golpe);
+                            int golpeint=(int)golpe;
+                            System.out.println("Has asestado un golpe debil de " + golpeint);
                             vida1 = vida1 - golpe;
                             if (vida1>0){
                                 cantidadGuiones1 = (int) (vida1 / 10);
                                 barraDeVida1 = "♥\uFE0F".repeat(cantidadGuiones1);
-                                System.out.println("La vida del jugador 1 es de " + vida1+"\n"+barraDeVida1+"\n" +
+                                int vidaint1=(int) vida1;
+                                System.out.println("La vida del jugador 1 es de " + vidaint1+"\n"+barraDeVida1+"\n" +
                                         "\n");
                             }else{
                                 System.out.println("El jugador 1 ha muerto \uD83D\uDC80");
@@ -655,14 +694,20 @@ public class Juego {
                         break;
                     case 2:
                         if (pocion2 != 0) {
-                            vida2 = vida2 + cura;
-                            cantidadGuiones2 = (int) (vida2 / 10);
-                            barraDeVida2 = "♥\uFE0F".repeat(cantidadGuiones2);
-                            System.out.println("Tu vida ha subido a " + vida2+"\n"+barraDeVida2);
+                            if (vida2<200){
+                                vida2 = vida2 + cura;
+                                cantidadGuiones2 = (int) (vida2 / 10);
+                                barraDeVida2 = "♥\uFE0F".repeat(cantidadGuiones2);
+                                vidaint2=(int) vida2;
+                                System.out.println("Tu vida ha subido a " + vidaint2+"\n"+barraDeVida2);
 
-                            pocion2--;
-                            System.out.println("Te quedan "+pocion2+" pociones \n" +
-                                    "\n");
+                                pocion2--;
+                                System.out.println("Te quedan "+pocion2+" pociones \n" +
+                                        "\n");
+                            }else{
+                                System.out.println("No puedes superar el limite de 200 de vida, has perdido tu pocion");
+                            }
+
                         } else {
                             System.out.println("No te quedan pociones, has gastado tu turno \n" +
                                     "\n");
@@ -675,24 +720,26 @@ public class Juego {
                 if (vida1>0) {
                     System.out.println("TURNO DEL JUGADOR 1 ");
                     System.out.println("Para atque pulse 1, para curarse pulse 2 ");
-                    System.out.println("Tienes " + vida1 +  " de vida \n" +
+                    int vidaint1=(int) vida1;
+                    System.out.println("Tienes " + vidaint1 +  " de vida \n" +
                             barraDeVida1);
                     accion = scan.nextInt();
                     switch (accion) {
                         case 1:
                             golpe = 0;
-                            float randomNumber = 0.8f + random.nextFloat();
+                            float randomNumber = 0.5f + random.nextFloat();
                             mitigacion = 0;
                             mitigacion = defensa2 / (defensa2 + 100);
-                            if (randomNumber >= 1.5) {
+                            if (randomNumber >= 1.3) {
                                 golpe = (ataque1 * mitigacion) * randomNumber;
-                                System.out.println("Has asestado un golpe critico de " + golpe);
+                                int golpeint=(int)golpe;
+                                System.out.println("Has asestado un golpe critico de " + golpeint);
                                 vida2 = vida2 - golpe;
                                 if (vida2>0){
                                     cantidadGuiones2 = (int) (vida2 / 10);
                                     barraDeVida2 = "♥\uFE0F".repeat(cantidadGuiones2);
-
-                                    System.out.println("La vida del jugador 2 es de " + vida2+"\n"+barraDeVida2+"\n" +
+                                    vidaint2=(int) vida2;
+                                    System.out.println("La vida del jugador 2 es de " + vidaint2+"\n"+barraDeVida2+"\n" +
                                             "\n");
                                 }else{
                                     System.out.println("El jugador 2 ha muerto \uD83D\uDC80");
@@ -700,27 +747,31 @@ public class Juego {
 
 
                             }
-                            if (randomNumber>=1.0) {
+                            if (randomNumber>=1.0 && randomNumber<1.3) {
                                 golpe = (ataque1 * mitigacion) * randomNumber;
-                                System.out.println("Has asestado un golpe normal de " + golpe);
+                                int golpeint=(int)golpe;
+                                System.out.println("Has asestado un golpe normal de " + golpeint);
                                 vida2 = vida2 - golpe;
                                 if (vida2>0){
                                     cantidadGuiones2 = (int) (vida2 / 10);
                                     barraDeVida2 = "♥\uFE0F".repeat(cantidadGuiones2);
-
-                                    System.out.println("La vida del jugador 2 es de " + vida2+"\n"+barraDeVida2+"\n" +
+                                    vidaint2=(int) vida2;
+                                    System.out.println("La vida del jugador 2 es de " + vidaint2+"\n"+barraDeVida2+"\n" +
                                             "\n");
                                 }else{
                                     System.out.println("El jugador 2 ha muerto \uD83D\uDC80");
                                 }
-                            } else {
+                            } else if (randomNumber<1.0 &&randomNumber>=0.5){
+
                                 golpe = (ataque1 * mitigacion) * randomNumber;
-                                System.out.println("Has asestado un golpe debil de " + golpe);
+                                int golpeint=(int)golpe;
+                                System.out.println("Has asestado un golpe debil de " + golpeint);
                                 vida2 = vida2 - golpe;
                                 if (vida2>0){
                                     cantidadGuiones2 = (int) (vida2 / 10);
                                     barraDeVida2 = "♥\uFE0F".repeat(cantidadGuiones2);
-                                    System.out.println("La vida del jugador 2 es de " + vida2+"\n"+barraDeVida2+"\n" +
+                                     vidaint2=(int) vida2;
+                                    System.out.println("La vida del jugador 2 es de " + vidaint2+"\n"+barraDeVida2+"\n" +
                                             "\n");
                                 }else{
                                     System.out.println("El jugador 2 ha muerto \uD83D\uDC80");
@@ -729,11 +780,17 @@ public class Juego {
                             break;
                         case 2:
                             if (pocion1 != 0) {
-                                vida1 = vida1 + cura;
-                                System.out.println("Tu vida ha subido a " + vida1+"\n"+barraDeVida1);
-                                pocion1--;
-                                System.out.println("Te quedan "+pocion1+" pociones \n" +
-                                        "\n");
+                                if (pocion1<200){
+                                    vida1 = vida1 + cura;
+                                    vidaint1=(int) vida1;
+                                    System.out.println("Tu vida ha subido a " + vidaint1+"\n"+barraDeVida1);
+                                    pocion1--;
+                                    System.out.println("Te quedan "+pocion1+" pociones \n" +
+                                            "\n");
+                                }else{
+                                    System.out.println("No puedes superar el limite de 200 de vida, has perdido tu pocion");
+                                }
+
                             } else {
                                 System.out.println("No te quedan pociones, has gastado tu turno \n" +
                                         "\n");
