@@ -123,7 +123,7 @@ public class Juego {
                             ataque1 = 0;
                             defensa1 = 0;
                             vida1 = 0;
-
+                            total1=0;
                         }
                     }
 
@@ -190,6 +190,7 @@ public class Juego {
                             ataque2 = 0;
                             defensa2 = 0;
                             vida2 = 0;
+                            total2=0;
                         }
                     }
                     System.out.println("¡Total aceptado! El total de puntos es: " + total2);
@@ -375,8 +376,11 @@ public class Juego {
                     break;
                 case 3:
 
-
-
+                    if ((velocidad1 == 0 || ataque1 == 0 || defensa1 == 0 || vida1 == 0) ||
+                            (velocidad2 == 0 || ataque2 == 0 || defensa2 == 0 || vida2 == 0)) {
+                        System.out.println("Debes configurar las estadísticas de ambos personajes antes de comenzar el juego.");
+                        opccion = 0;
+                    }
 
                     break;
             }
@@ -515,6 +519,7 @@ public class Juego {
                                         "\n");
                             }else{
                                 System.out.println("No puedes superar el limite de 200 de vida, has perdido tu pocion");
+                                pocion1--;
                             }
 
                         } else {
@@ -609,6 +614,7 @@ public class Juego {
                                             "\n");
                                 }else{
                                     System.out.println("No puedes superar el limite de 200 de vida, has perdido tu pocion");
+                                    pocion2--;
                                 }
 
                             } else {
@@ -706,6 +712,7 @@ public class Juego {
                                         "\n");
                             }else{
                                 System.out.println("No puedes superar el limite de 200 de vida, has perdido tu pocion");
+                                pocion2--;
                             }
 
                         } else {
@@ -780,7 +787,7 @@ public class Juego {
                             break;
                         case 2:
                             if (pocion1 != 0) {
-                                if (pocion1<200){
+                                if (vida1<200){
                                     vida1 = vida1 + cura;
                                     vidaint1=(int) vida1;
                                     System.out.println("Tu vida ha subido a " + vidaint1+"\n"+barraDeVida1);
@@ -789,6 +796,7 @@ public class Juego {
                                             "\n");
                                 }else{
                                     System.out.println("No puedes superar el limite de 200 de vida, has perdido tu pocion");
+                                    pocion1--;
                                 }
 
                             } else {
